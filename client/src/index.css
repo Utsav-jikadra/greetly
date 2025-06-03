@@ -1,0 +1,172 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #F3F6FB;
+    --foreground: #0B1A3F;
+    
+    --primary: #1E3A8A;
+    --primary-hover: #162C6B;
+    
+    --secondary: #9B1B61;
+    --secondary-hover: #7A154C;
+    
+    --accent-light: #E99AB7;
+    --accent-dark: #6A2C6F;
+    --accent-hover: #562459;
+    
+    --text-primary: #0B1A3F;
+    --text-secondary: #637394;
+    --text-light: #FFFFFF;
+    
+    --error: #D7263D;
+    --error-light: #FF3B55;
+    --error-dark: #B01F32;
+    
+    --border: #E2E8F0;
+    --border-active: #1E3A8A;
+    
+    --radius: 0.5rem;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  }
+}
+
+@layer utilities {
+  /* Text Colors */
+  .text-foreground {
+    color: var(--foreground);
+  }
+  
+  .text-primary {
+    color: var(--primary);
+  }
+  
+  .text-secondary {
+    color: var(--secondary);
+  }
+  
+  .text-accent-light {
+    color: var(--accent-light);
+  }
+  
+  .text-accent-dark {
+    color: var(--accent-dark);
+  }
+  
+  .text-error {
+    color: var(--error);
+  }
+  
+  /* Background Colors */
+  .bg-background {
+    background-color: var(--background);
+  }
+  
+  .bg-primary {
+    background-color: var(--primary);
+  }
+  
+  .bg-primary-hover {
+    background-color: var(--primary-hover);
+  }
+  
+  .bg-secondary {
+    background-color: var(--secondary);
+  }
+  
+  .bg-secondary-hover {
+    background-color: var(--secondary-hover);
+  }
+  
+  .bg-accent-light {
+    background-color: var(--accent-light);
+  }
+  
+  .bg-accent-dark {
+    background-color: var(--accent-dark);
+  }
+  
+  .bg-accent-hover {
+    background-color: var(--accent-hover);
+  }
+  
+  /* Border Colors */
+  .border-primary {
+    border-color: var(--primary);
+  }
+  
+  .border-secondary {
+    border-color: var(--secondary);
+  }
+  
+  .border-accent {
+    border-color: var(--accent-dark);
+  }
+  
+  .border-error {
+    border-color: var(--error);
+  }
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+.animate-slide-up {
+  animation: slideUp 0.4s ease-out;
+}
+
+/* Focus and Active States */
+.focus-ring {
+  @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-primary focus-visible:ring-opacity-50;
+}
+
+.active-scale {
+  @apply active:scale-95 transition-transform;
+}
+
+/* Custom Shadows */
+.shadow-primary {
+  box-shadow: 0 4px 14px 0 rgba(30, 58, 138, 0.25);
+}
+
+.shadow-secondary {
+  box-shadow: 0 4px 14px 0 rgba(155, 27, 97, 0.25);
+}
+
+.shadow-accent {
+  box-shadow: 0 4px 14px 0 rgba(106, 44, 111, 0.25);
+}
