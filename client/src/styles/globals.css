@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --primary: #60A5FA;
+  --primary-light: #93C5FD;
+  --primary-dark: #3B82F6;
+  --secondary: #FFB86C;
+  --secondary-light: #FCD34D;
+  --secondary-dark: #F59E0B;
+  --accent: #F472B6;
+  --accent-light: #F9A8D4;
+  --accent-dark: #EC4899;
+  --background: #F0F9FF;
+  --text-primary: #1F2937;
+  --text-secondary: #4B5563;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', 'Poppins', system-ui, -apple-system, sans-serif;
+  }
+
+  body {
+    @apply bg-white text-text-primary antialiased;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-bold tracking-tight;
+  }
+}
+
+@layer components {
+  .container {
+    @apply px-4 mx-auto max-w-7xl;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center font-medium transition-all duration-300 
+    disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 
+    focus:ring-offset-2 active:scale-[0.98];
+  }
+
+  .btn-primary {
+    @apply bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] text-white 
+    hover:from-[#3B82F6] hover:to-[#2563EB] shadow-md hover:shadow-lg;
+  }
+
+  .btn-secondary {
+    @apply bg-gradient-to-r from-[#FFB86C] to-[#F59E0B] text-white 
+    hover:from-[#F59E0B] hover:to-[#D97706] shadow-md hover:shadow-lg;
+  }
+
+  .btn-accent {
+    @apply bg-gradient-to-r from-[#F472B6] to-[#EC4899] text-white 
+    hover:from-[#EC4899] hover:to-[#DB2777] shadow-md hover:shadow-lg;
+  }
+
+  .card {
+    @apply bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 overflow-hidden;
+  }
+
+  .card-gradient {
+    @apply bg-gradient-to-br from-white to-[#F0F9FF]/30;
+  }
+}
+
+/* Animations */
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+.animate-float {
+  animation: float 3s ease-in-out infinite;
+}
+
+.animate-float-delay {
+  animation: float 3s ease-in-out infinite;
+  animation-delay: 1.5s;
+}
+
+/* Scroll Animations */
+.scroll-animate {
+  @apply transition-all duration-500;
+}
+
+.scroll-animate.fade-up {
+  @apply translate-y-8 opacity-0;
+}
+
+.scroll-animate.fade-up.in-view {
+  @apply translate-y-0 opacity-100;
+}
+
+/* Gradient Text */
+.gradient-text {
+  @apply bg-gradient-to-r from-[#60A5FA] to-[#F472B6] bg-clip-text text-transparent;
+}
+
+/* Card Hover Effects */
+.card-hover {
+  @apply transition-all duration-300 hover:scale-105 hover:-translate-y-1;
+}
+
+/* Icon Container */
+.icon-container {
+  @apply p-3 rounded-2xl inline-flex items-center justify-center transition-transform duration-300;
+}
+
+.icon-container-primary {
+  @apply bg-gradient-to-br from-[#60A5FA] to-[#3B82F6] text-white;
+}
+
+.icon-container-secondary {
+  @apply bg-gradient-to-br from-[#FFB86C] to-[#F59E0B] text-white;
+}
+
+.icon-container-accent {
+  @apply bg-gradient-to-br from-[#F472B6] to-[#EC4899] text-white;
+} 

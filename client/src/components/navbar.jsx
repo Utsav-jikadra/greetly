@@ -1,160 +1,138 @@
-import React from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { Link, useLocation } from 'wouter';
 import { Button } from './ui/button';
-import { LogIn, UserPlus, Menu, X, HelpCircle } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
+import { AuthModal } from './auth-modal';
 
-export function Navbar({ onAuthClick }) {
-  const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+const navItems = [
+  { label: 'Home', href: '/greetly' },
+  { label: 'Features', href: '/greetly/features' },
+  { label: 'Pricing', href: '/greetly/pricing' },
+  { label: 'About', href: '/greetly/about' },
+  { label: 'Support', href: '/greetly/support' }
+];
 
-  const handleAuthClick = (type) => {
+export const Navbar = () => {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [location] = useLocation();
+  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [authView, setAuthView] = useState('login');
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const handleAuthClick = (view) => {
+    setAuthView(view);
+    setIsAuthModalOpen(true);
     setIsMenuOpen(false);
-    onAuthClick(type);
   };
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-background-card/90 backdrop-blur-md border-b border-border">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          {/* Logo */}
-          <motion.div 
-            className="flex-shrink-0"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-          >
-            <h1 className="text-xl md:text-2xl lg:text-3xl font-bold bg-gradient-to-r from-primary via-secondary to-accent-dark bg-clip-text text-transparent">
-              Greetly
-            </h1>
-          </motion.div>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg border-b border-[#60A5FA]/10' : 'bg-transparent'
+      }`}
+    >
+      {/* Auth Modal */}
+      <AuthModal 
+        isOpen={isAuthModalOpen} 
+        onClose={() => setIsAuthModalOpen(false)}
+        initialView={authView}
+      />
+
+      <div className="container mx-auto px-4">
+        <div className="flex h-16 items-center justify-between">
+          <Link href="/">
+            <a className="text-2xl font-bold bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] bg-clip-text text-transparent">Greetly</a>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex md:items-center md:space-x-4 lg:space-x-8">
-            {[
-              { href: "#", text: "Home" },
-              { href: "#features",text: "Features" },
-              { href: "#pricing", text: "Pricing" },
-              { href: "#about", text: "About" },
-              { href: "#support", text: "Support" }
-            ].map((item, index) => (
-              <motion.a
-                key={index}
-                href={item.href}
-                className="text-text-secondary hover:text-text-primary transition-colors flex items-center gap-1.5 px-2 py-1 rounded-md hover:bg-background"
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-              >
-                {item.icon}
-                <span className="text-sm lg:text-base font-bold">{item.text}</span>
-              </motion.a>
+          <div className="hidden md:flex items-center space-x-8">
+            {navItems.map((item) => (
+              <Link key={item.href} href={item.href}>
+                <a
+                  className={`text-base font-medium transition-all duration-300 hover:text-[#60A5FA] hover:scale-105 ${
+                    location === item.href ? 'text-[#60A5FA]' : 'text-gray-600'
+                  }`}
+                >
+                  {item.label}
+                </a>
+              </Link>
             ))}
           </div>
 
-          {/* Auth Buttons - Desktop */}
-          <div className="hidden md:flex md:items-center md:space-x-3 lg:space-x-4">
-            <Button 
-              variant="outline"
-              size="sm"
-              className="text-sm lg:text-base px-3 lg:px-4 py-2 group border-2 border-primary text-primary hover:bg-primary hover:text-text-light transition-all duration-300 shadow-primary/25 hover:shadow-primary/50"
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center space-x-4">
+            <Button
+              variant="ghost"
               onClick={() => handleAuthClick('login')}
-              title="Sign in to your account"
+              className="text-gray-600 hover:text-[#60A5FA] hover:bg-[#60A5FA]/5"
             >
-              <LogIn className="w-4 h-4 mr-1.5 transition-transform group-hover:translate-x-1" />
-              Login
+              Log In
             </Button>
-            <Button 
-              variant="default"
-              size="sm"
-              className="text-sm lg:text-base px-3 lg:px-4 py-2 group bg-secondary hover:bg-secondary-hover text-text-light shadow-secondary hover:shadow-secondary/50 transition-all duration-300"
+            <Button
               onClick={() => handleAuthClick('signup')}
-              title="Create a new account"
+              className="bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] text-white hover:shadow-lg hover:shadow-[#60A5FA]/25 transition-all duration-300"
             >
-              <UserPlus className="w-4 h-4 mr-1.5 transition-transform group-hover:scale-110" />
               Sign Up
             </Button>
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="md:hidden">
-            <Button
-              variant="ghost"
-              size="sm"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-1.5 text-text-secondary hover:text-text-primary hover:bg-background rounded-lg"
-            >
-              <AnimatePresence mode="wait">
-                <motion.div
-                  key={isMenuOpen ? 'close' : 'menu'}
-                  initial={{ opacity: 0, rotate: -90 }}
-                  animate={{ opacity: 1, rotate: 0 }}
-                  exit={{ opacity: 0, rotate: 90 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  {isMenuOpen ? (
-                    <X className="h-6 w-6" />
-                  ) : (
-                    <Menu className="h-6 w-6" />
-                  )}
-                </motion.div>
-              </AnimatePresence>
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMenuOpen && (
-          <motion.div 
-            className="md:hidden fixed inset-x-0 top-16 bg-background-card border-b border-border shadow-lg"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+          <button
+            className="md:hidden"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            <div className="px-4 py-2 space-y-1 max-h-[calc(100vh-4rem)] overflow-y-auto">
-              {[
-                { href: "#", icon: <Home className="w-4 h-4" />, text: "Home" },
-                { href: "#features", text: "Features" },
-                { href: "#pricing", text: "Pricing" },
-                { href: "#about", text: "About" },
-                { href: "#support", icon: <HelpCircle className="w-4 h-4" />, text: "Support" }
-              ].map((item, index) => (
-                <motion.a
-                  key={index}
-                  href={item.href}
-                  className="flex items-center gap-2 px-4 py-3 text-text-secondary hover:text-text-primary hover:bg-background rounded-lg transition-colors"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: index * 0.1 }}
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  {item.icon}
-                  <span className="text-base">{item.text}</span>
-                </motion.a>
+            {isMenuOpen ? (
+              <X className="h-6 w-6 text-gray-600" />
+            ) : (
+              <Menu className="h-6 w-6 text-gray-600" />
+            )}
+          </button>
+        </div>
+
+        {/* Mobile Navigation */}
+        {isMenuOpen && (
+          <div className="md:hidden py-4 bg-white/95 backdrop-blur-md rounded-b-2xl shadow-xl border-t border-[#60A5FA]/10">
+            <div className="flex flex-col space-y-4">
+              {navItems.map((item) => (
+                <Link key={item.href} href={item.href}>
+                  <a
+                    className={`text-sm font-medium transition-colors hover:text-[#60A5FA] px-4 py-2 rounded-lg hover:bg-[#60A5FA]/5 ${
+                      location === item.href ? 'text-[#60A5FA] bg-[#60A5FA]/5' : 'text-gray-600'
+                    }`}
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {item.label}
+                  </a>
+                </Link>
               ))}
-              <div className="grid grid-cols-2 gap-3 pt-4 pb-6">
-                <Button 
-                  variant="outline"
-                  size="sm" 
-                  className="w-full text-sm py-2.5 group border-2 border-primary text-primary hover:bg-primary hover:text-text-light transition-all duration-300 shadow-primary/25 hover:shadow-primary/50"
+              <div className="pt-4 flex flex-col space-y-3 px-4">
+                <Button
+                  variant="ghost"
                   onClick={() => handleAuthClick('login')}
+                  className="w-full text-gray-600 hover:text-[#60A5FA] hover:bg-[#60A5FA]/5 border border-gray-200"
                 >
-                  <LogIn className="w-4 h-4 mr-1.5 transition-transform group-hover:translate-x-1" />
-                  Login
+                  Log In
                 </Button>
-                <Button 
-                  variant="default"
-                  size="sm" 
-                  className="w-full text-sm py-2.5 group bg-secondary hover:bg-secondary-hover text-text-light shadow-secondary hover:shadow-secondary/50 transition-all duration-300"
+                <Button
                   onClick={() => handleAuthClick('signup')}
+                  className="w-full bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] text-white hover:shadow-lg hover:shadow-[#60A5FA]/25"
                 >
-                  <UserPlus className="w-4 h-4 mr-1.5 transition-transform group-hover:scale-110" />
                   Sign Up
                 </Button>
               </div>
             </div>
-          </motion.div>
+          </div>
         )}
-      </AnimatePresence>
+      </div>
     </nav>
   );
-} 
+}; 

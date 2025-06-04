@@ -47,10 +47,10 @@ const team = [
     role: 'Lead Engineer',
     image: 'https://i.pravatar.cc/300?img=6',
     bio: 'AI specialist focused on creating natural, context-aware communication.'
-  }
+    }
 ];
 
-export function AboutPage() {
+export default function AboutPage() {
   useEffect(() => {
     // Mission section animation
     gsap.from('.mission-content', {

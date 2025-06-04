@@ -1,6 +1,12 @@
 import React from 'react';
-import { SupportSection } from '@/components/support-section';
+import { SupportSection } from '../components/support-section';
 
-export function SupportPage() {
-  return <SupportSection />;
-} 
+const SupportPage = () => {
+  return (
+    <div className="min-h-screen bg-background pt-20">
+      <SupportSection />
+    </div>
+  );
+};
+
+export default SupportPage; 

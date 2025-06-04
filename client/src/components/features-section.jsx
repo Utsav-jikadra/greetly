@@ -1,209 +1,195 @@
-import React, { useEffect, useRef } from 'react';
-import { motion, useInView, useAnimation, AnimatePresence } from 'framer-motion';
+import React from 'react';
+import { motion } from 'framer-motion';
 import { 
-  Calendar, 
-  MessageSquare, 
-  Zap, 
-  Users, 
-  BarChart, 
-  Shield 
+  Sparkles,
+  Heart, 
+  Clock, 
+  Bell, 
+  MessageCircle,
+  Gift,
+  Calendar
 } from 'lucide-react';
+import { theme } from '../theme/config';
 
 export function FeaturesSection() {
-  const controls = useAnimation();
-  const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-100px" });
-
-  useEffect(() => {
-    if (isInView) {
-      controls.start("visible");
-    }
-  }, [isInView, controls]);
-
-  const containerVariants = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.1
-      }
-    }
-  };
-
-  const titleVariants = {
-    hidden: {
-      opacity: 0,
-      y: 30
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 20
-      }
-    }
-  };
-
-  const featureVariants = {
-    hidden: {
-      opacity: 0,
-      y: 40,
-      scale: 0.9
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        type: "spring",
-        stiffness: 200,
-        damping: 20
-      }
-    }
-  };
-
-  const iconVariants = {
-    hover: {
-      scale: 1.2,
-      rotate: [0, 10, -10, 0],
-      transition: {
-        type: "spring",
-        stiffness: 400,
-        damping: 10
-      }
-    },
-    tap: {
-      scale: 0.9
-    }
-  };
-
   const features = [
     {
-      icon: <Calendar className="w-7 h-7" />,
+      icon: Calendar,
       title: "Smart Scheduling",
       description: "Never miss important dates with our AI-powered scheduling system",
-      color: "bg-blue-100 text-blue-600",
-      hoverColor: "group-hover:bg-blue-200 group-hover:text-blue-700",
-      shadowColor: "group-hover:shadow-blue-200/50",
-      gradient: "hover:bg-gradient-to-br hover:from-blue-50 hover:to-blue-100/50"
+      gradient: "from-[#60A5FA] to-[#3B82F6]"
     },
     {
-      icon: <MessageSquare className="w-7 h-7" />,
-      title: "AI Message Generation",
-      description: "Create perfect personalized messages with our advanced AI technology",
-      color: "bg-purple-100 text-purple-600",
-      hoverColor: "group-hover:bg-purple-200 group-hover:text-purple-700",
-      shadowColor: "group-hover:shadow-purple-200/50",
-      gradient: "hover:bg-gradient-to-br hover:from-purple-50 hover:to-purple-100/50"
+      icon: Heart,
+      title: "Personal Touch",
+      description: "Create heartfelt messages that truly resonate with your loved ones",
+      gradient: "from-[#F472B6] to-[#EC4899]"
     },
     {
-      icon: <Zap className="w-7 h-7" />,
-      title: "Instant Delivery",
-      description: "Send greetings instantly via WhatsApp, SMS, or Email",
-      color: "bg-amber-100 text-amber-600",
-      hoverColor: "group-hover:bg-amber-200 group-hover:text-amber-700",
-      shadowColor: "group-hover:shadow-amber-200/50",
-      gradient: "hover:bg-gradient-to-br hover:from-amber-50 hover:to-amber-100/50"
+      icon: Bell,
+      title: "Smart Reminders",
+      description: "Get gentle nudges for upcoming occasions and birthdays",
+      gradient: "from-[#FFB86C] to-[#F59E0B]"
     },
     {
-      icon: <Users className="w-7 h-7" />,
-      title: "Contact Management",
-      description: "Easily organize and manage your contacts and relationships",
-      color: "bg-emerald-100 text-emerald-600",
-      hoverColor: "group-hover:bg-emerald-200 group-hover:text-emerald-700",
-      shadowColor: "group-hover:shadow-emerald-200/50",
-      gradient: "hover:bg-gradient-to-br hover:from-emerald-50 hover:to-emerald-100/50"
+      icon: MessageCircle,
+      title: "Multi-Channel",
+      description: "Send via WhatsApp, SMS, or Email — whatever works best",
+      gradient: "from-[#60A5FA] to-[#3B82F6]"
     },
     {
-      icon: <BarChart className="w-7 h-7" />,
-      title: "Analytics Dashboard",
-      description: "Track your greeting history and engagement metrics",
-      color: "bg-rose-100 text-rose-600",
-      hoverColor: "group-hover:bg-rose-200 group-hover:text-rose-700",
-      shadowColor: "group-hover:shadow-rose-200/50",
-      gradient: "hover:bg-gradient-to-br hover:from-rose-50 hover:to-rose-100/50"
+      icon: Gift,
+      title: "Gift Integration",
+      description: "Pair your messages with perfect gifts from our partners",
+      gradient: "from-[#F472B6] to-[#EC4899]"
     },
     {
-      icon: <Shield className="w-7 h-7" />,
-      title: "Privacy & Security",
-      description: "Your data is protected with enterprise-grade security",
-      color: "bg-cyan-100 text-cyan-600",
-      hoverColor: "group-hover:bg-cyan-200 group-hover:text-cyan-700",
-      shadowColor: "group-hover:shadow-cyan-200/50",
-      gradient: "hover:bg-gradient-to-br hover:from-cyan-50 hover:to-cyan-100/50"
+      icon: Sparkles,
+      title: "AI Magic",
+      description: "Let our AI help craft the perfect message every time",
+      gradient: "from-[#FFB86C] to-[#F59E0B]"
     }
   ];
 
   return (
-    <section 
-      id="features" 
-      className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-gray-50/50"
-      ref={ref}
-    >
+    <section className={`${theme.gradients.primary} ${theme.spacing.section} relative overflow-hidden`}>
+      {/* Decorative Elements */}
+      <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-[#60A5FA]/10 blur-3xl" />
+        <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#FFB86C]/10 blur-3xl" />
+      </div>
+
+      <div className={theme.spacing.container}>
       <motion.div 
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
-        variants={containerVariants}
         initial="hidden"
-        animate={controls}
-      >
-        <motion.div 
-          className="text-center mb-12 sm:mb-16"
-          variants={titleVariants}
+          whileInView="visible"
+          viewport={{ once: false, margin: "-100px" }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: { opacity: 1 }
+          }}
+          className="relative"
         >
-          <motion.h2 
-            className="text-3xl sm:text-4xl lg:text-5xl font-bold bg-gradient-to-r from-blue-600 to-blue-800 bg-clip-text text-transparent mb-4"
-            variants={titleVariants}
+          {/* Section Header */}
+          <motion.div
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { 
+                opacity: 1, 
+                y: 0,
+                transition: {
+                  duration: 0.5,
+                  ease: "easeOut"
+                }
+              }
+            }}
+            className="text-center mb-16"
           >
-            Powerful Features
-          </motion.h2>
-          <motion.p 
-            className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto px-4 sm:px-0"
-            variants={titleVariants}
-          >
-            Everything you need to manage and send perfect greetings
-          </motion.p>
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-[#60A5FA] to-[#F472B6] bg-clip-text text-transparent">
+              Why Choose Greetly?
+            </h2>
+            <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+              Join thousands of thoughtful people who never miss a chance to celebrate life's special moments
+            </p>
         </motion.div>
 
+          {/* Features Grid */}
         <motion.div 
-          className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
-          variants={containerVariants}
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
+                transition: {
+                  staggerChildren: 0.15
+                }
+              }
+            }}
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
           {features.map((feature, index) => (
             <motion.div
-              key={index}
-              variants={featureVariants}
-              className={`group bg-white rounded-xl p-6 sm:p-8 shadow-lg border border-gray-100 
-                transform transition-all duration-300 hover:shadow-xl ${feature.gradient} 
-                hover:-translate-y-1 ${feature.shadowColor}`}
-              whileHover={{
+                key={feature.title}
+                variants={{
+                  hidden: { opacity: 0, y: 20 },
+                  visible: { 
+                    opacity: 1, 
+                    y: 0,
+                    transition: {
+                      type: "spring",
+                      stiffness: 50,
+                      damping: 15
+                    }
+                  }
+                }}
+                whileHover={theme.animations.cardHover}
+                className="group"
+              >
+                <div className={`${theme.cards.base} ${theme.cards.variants.gradient} ${theme.borderRadius.default} ${theme.shadows.card} p-8`}>
+                  <div className={`mb-6 inline-block bg-gradient-to-br ${feature.gradient} ${theme.borderRadius.default} p-3 text-white
+                    transform transition-transform duration-300 group-hover:scale-110 group-hover:rotate-3`}>
+                    <feature.icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="text-xl font-semibold mb-3 text-text-primary group-hover:text-[#60A5FA] transition-colors duration-300">
+                    {feature.title}
+                  </h3>
+                  <p className="text-text-secondary leading-relaxed">
+                    {feature.description}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </motion.div>
+
+          {/* Stats Section */}
+          <motion.div
+            variants={{
+              hidden: { opacity: 0 },
+              visible: {
+                opacity: 1,
                 transition: {
-                  type: "spring",
-                  stiffness: 400,
-                  damping: 20
+                  delay: 0.3,
+                  staggerChildren: 0.1
+                }
                 }
               }}
-            >
+            className="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8"
+          >
+            {[
+              { number: "50K+", label: "Happy Users" },
+              { number: "1M+", label: "Greetings Sent" },
+              { number: "99%", label: "On-time Delivery" }
+            ].map((stat) => (
               <motion.div 
-                className={`p-3 rounded-lg inline-block ${feature.color} ${feature.hoverColor} 
-                  transition-all duration-300 mb-4 sm:mb-5`}
-                variants={iconVariants}
-                whileHover="hover"
-                whileTap="tap"
+                key={stat.label}
+                variants={{
+                  hidden: { opacity: 0, scale: 0.8 },
+                  visible: {
+                    opacity: 1,
+                    scale: 1,
+                    transition: {
+                      type: "spring",
+                      stiffness: 50,
+                      damping: 15
+                    }
+                  }
+                }}
+                whileHover={theme.animations.cardHover}
+                className={`${theme.cards.base} ${theme.cards.variants.gradient} ${theme.borderRadius.default} ${theme.shadows.card} 
+                  p-8 text-center hover:bg-gradient-to-br hover:from-[#60A5FA]/5 hover:to-transparent`}
               >
-                {feature.icon}
-              </motion.div>
-              <h3 className="text-lg sm:text-xl font-semibold text-gray-900 mb-2 sm:mb-3 group-hover:text-blue-700 transition-colors duration-300">
-                {feature.title}
-              </h3>
-              <p className="text-sm sm:text-base text-gray-600 group-hover:text-gray-700 transition-colors duration-300 leading-relaxed">
-                {feature.description}
-              </p>
+                <div className="text-4xl font-bold bg-gradient-to-r from-[#60A5FA] to-[#F472B6] bg-clip-text text-transparent mb-2">
+                  {stat.number}
+                </div>
+                <div className="text-text-secondary font-medium">
+                  {stat.label}
+                </div>
             </motion.div>
           ))}
         </motion.div>
       </motion.div>
+      </div>
     </section>
   );
 }
+
+export default FeaturesSection;
