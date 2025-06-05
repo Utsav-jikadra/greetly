@@ -31,13 +31,13 @@ export const HeroSection = () => {
 
   const img4Transform = useTransform(
     scrollY,
-    [heroHeight*1, heroHeight*2 ],
+    [heroHeight*0.8, heroHeight*1.5 ],
     ["translate(0, 0) rotate(-12deg)", "translate(-200px, -150px) rotate(-32deg)"]
   );
 
   const img5Transform = useTransform(
     scrollY,
-    [heroHeight*1, heroHeight*2],
+    [heroHeight*0.8, heroHeight*1.5],
     ["translate(0, 0) rotate(12deg)", "translate(200px, -150px) rotate(32deg)"]
   );
 
