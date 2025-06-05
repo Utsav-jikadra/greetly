@@ -33,9 +33,9 @@ export const Navbar = () => {
     >
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
-          <Link href="/">
+          
             <a className="text-2xl font-bold bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] bg-clip-text text-transparent">Greetly</a>
-          </Link>
+          
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
