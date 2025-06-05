@@ -37,7 +37,7 @@ export function Footer() {
 
   return (
     <footer className="bg-white border-t border-gray-200">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-5">
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
           {/* Brand Section */}
           <div className="col-span-2 md:col-span-1">
@@ -85,11 +85,11 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-8 border-t border-gray-200 pt-8 flex flex-col md:flex-row justify-between items-center">
+        <div className="mt-8 border-t border-gray-200 pt-5  flex flex-col md:flex-row justify-between items-center">
           <p className="text-base text-gray-500">
             © {new Date().getFullYear()} Greetly. All rights reserved.
           </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+          <div className="flex space-x-6  md:mt-0">
             {socialLinks.map((social) => (
               <a
                 key={social.label}

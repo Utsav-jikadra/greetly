@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
-import { AuthModal } from './auth-modal';
 
 const navItems = [
   { label: 'Home', href: '/greetly' },
@@ -15,9 +14,7 @@ const navItems = [
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [location] = useLocation();
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authView, setAuthView] = useState('login');
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -28,25 +25,12 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const handleAuthClick = (view) => {
-    setAuthView(view);
-    setIsAuthModalOpen(true);
-    setIsMenuOpen(false);
-  };
-
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg border-b border-[#60A5FA]/10' : 'bg-transparent'
       }`}
     >
-      {/* Auth Modal */}
-      <AuthModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)}
-        initialView={authView}
-      />
-
       <div className="container mx-auto px-4">
         <div className="flex h-16 items-center justify-between">
           <Link href="/">
@@ -71,15 +55,15 @@ export const Navbar = () => {
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Button
-              variant="outline"
-              onClick={() => handleAuthClick('login')}
-              className="text-gray-700 hover:text-gray-900 border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50"
+              variant="ghost"
+              onClick={() => setLocation('/greetly/login')}
+              className="text-gray-600 hover:text-[#60A5FA] hover:bg-[#60A5FA]/5 bg-white border border-gray-200 px-4 py-2 transition-all duration-300 rounded-full"
             >
               Log In
             </Button>
             <Button
-              onClick={() => handleAuthClick('signup')}
-              className="bg-[#3B82F6] text-white hover:bg-[#2563EB] transition-colors duration-200"
+              onClick={() => setLocation('/greetly/signup')}
+              className="bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] text-white hover:shadow-lg hover:shadow-[#60A5FA]/25 transition-all duration-300"
             >
               Sign Up
             </Button>
@@ -117,13 +101,13 @@ export const Navbar = () => {
               <div className="pt-4 flex flex-col space-y-3 px-4">
                 <Button
                   variant="ghost"
-                  onClick={() => handleAuthClick('login')}
+                  onClick={() => setLocation('/greetly/login')}
                   className="w-full text-gray-600 hover:text-[#60A5FA] hover:bg-[#60A5FA]/5 border border-gray-200"
                 >
                   Log In
                 </Button>
                 <Button
-                  onClick={() => handleAuthClick('signup')}
+                  onClick={() => setLocation('/greetly/signup')}
                   className="w-full bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] text-white hover:shadow-lg hover:shadow-[#60A5FA]/25"
                 >
                   Sign Up

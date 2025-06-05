@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Button } from './ui/button';
 import { PlayCircle } from 'lucide-react';
@@ -7,11 +7,11 @@ import img1 from '../assets/img1.jpg'
 import img2 from '../assets/img2.jpg'
 import img4 from '../assets/img4.jpg'
 import img5 from '../assets/img5.jpg'
-import { AuthModal } from './auth-modal';
+import { useLocation } from 'wouter';
 
 export const HeroSection = () => {
   const { scrollY } = useScroll();
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   // Animation triggers when hero section starts going out of view
   const heroHeight = typeof window !== 'undefined' ? window.innerHeight : 800;
@@ -44,11 +44,6 @@ export const HeroSection = () => {
   return (
     <section className="relative min-h-screen bg-gradient-to-b from-[#E6F4F1] to-white pt-16 sm:pt-24 md:pt-32 pb-10 sm:pb-16 md:pb-20 overflow-hidden">
       {/* Background decorative elements */}
-      <AuthModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)}
-        initialView="signup"
-      />
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-20 sm:-top-40 -right-20 sm:-right-40 h-[300px] w-[300px] sm:h-[600px] sm:w-[600px] rounded-full bg-[#60A5FA]/10 blur-3xl animate-pulse" />
         <div className="absolute -bottom-20 sm:-bottom-40 -left-20 sm:-left-40 h-[300px] w-[300px] sm:h-[600px] sm:w-[600px] rounded-full bg-[#F472B6]/10 blur-3xl animate-pulse delay-1000" />
@@ -90,7 +85,7 @@ export const HeroSection = () => {
           >
             <Button 
               size="lg" 
-              onClick={() => setIsAuthModalOpen(true)}
+              onClick={() => setLocation('/greetly/signup')}
               className="w-full sm:w-auto min-w-[200px] md:min-w-[250px] bg-[#60A5FA] hover:bg-[#3B82F6] text-white font-semibold py-3 sm:py-4 text-base sm:text-lg 2xl:text-xl shadow-lg shadow-[#60A5FA]/25 hover:shadow-xl hover:shadow-[#60A5FA]/30 transition-all duration-300"
             >
               Start Free Trial
@@ -180,8 +175,6 @@ export const HeroSection = () => {
             </div>
           </div>
         </motion.div>
-        
-        
       </div>
     </section>
   );
