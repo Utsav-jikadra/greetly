@@ -1,8 +1,7 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Route, Switch } from 'wouter';
 import { Navbar } from './components/navbar';
 import { Footer } from './components/footer';
-import { AuthModal } from './components/auth-modal';
 import HomePage from './pages/home';
 import FeaturesPage from './pages/features';
 import PricingPage from './pages/pricing';
@@ -10,26 +9,15 @@ import AboutPage from './pages/about';
 import SupportPage from './pages/support';
 import LoginPage from './pages/login';
 import SignupPage from './pages/signup';
-import { MotionConfig } from "framer-motion"; // ✅ only this is valid
+import { MotionConfig } from "framer-motion";
 import ScrollToTop from './ScrollToTop';
 
-
-
 function App() {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
-  const [authModalView, setAuthModalView] = useState('login');
-
-  const handleAuthClick = (type) => {
-    setAuthModalView(type);
-    setIsAuthModalOpen(true);
-  };
-
   return (
     <MotionConfig reducedMotion="user">
-       
     <div className="min-h-screen bg-background flex flex-col">
       <ScrollToTop />
-      <Navbar onAuthClick={handleAuthClick} />
+      <Navbar />
       
       <main className="flex-grow">
         <Switch>
@@ -44,14 +32,7 @@ function App() {
       </main>
 
       <Footer />
-
-      <AuthModal 
-        isOpen={isAuthModalOpen}
-        onClose={() => setIsAuthModalOpen(false)}
-        initialView={authModalView}
-      />
     </div>
-    
     </MotionConfig>
   );
 }
