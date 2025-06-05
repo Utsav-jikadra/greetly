@@ -15,14 +15,14 @@ export function HowItWorks() {
     {
       icon: MessageCircle,
       title: "Craft Your Message",
-      image: "https://lh7-us.googleusercontent.com/docsz/AD_4nXdZpD8I5Q3VXncd6ZSUcRBIus3WyFL0ZYsye5wbT7pVjwjKvHF-qrwHGVd-Me4369B3ZWnnej3XvzHTXBZUmv13-caMMXVS6p7YxfxGc0SOEWIlxlI4b4lSV6JKMZpz3jHMjX0Q5sui8saKPzvNbJ-_PUo?key=1lnbn8-Az2qyojsnZFp1DQ",
+      image: "https://media.gettyimages.com/id/1404749040/photo/human-vs-robot.jpg?s=612x612&w=0&k=20&c=IjlGSvSqq8-G-Mzc6CFxwIFzjAk6coClu7SRZQ2XgeU=",
       description: "Use our AI to create the perfect personalized message or write your own",
       gradient: "from-[#F472B6] to-[#EC4899]"
     },
     {
       icon: Send,
       title: "Schedule Delivery",
-      image: "https://lh7-us.googleusercontent.com/docsz/AD_4nXdZpD8I5Q3VXncd6ZSUcRBIus3WyFL0ZYsye5wbT7pVjwjKvHF-qrwHGVd-Me4369B3ZWnnej3XvzHTXBZUmv13-caMMXVS6p7YxfxGc0SOEWIlxlI4b4lSV6JKMZpz3jHMjX0Q5sui8saKPzvNbJ-_PUo?key=1lnbn8-Az2qyojsnZFp1DQ",
+      image: "https://media.gettyimages.com/id/1367899893/photo/multi-racial-diverse-group-of-people-working-with-paperwork-on-a-board-room-table-at-a.jpg?s=612x612&w=0&k=20&c=2t0t2NfFIpuggzGw54kqtYanxj3f7if1CVjnPh5YRCc=",
       description: "Choose when and how to send your greeting - SMS, WhatsApp, or Email",
       gradient: "from-[#FFB86C] to-[#F59E0B]"
     },
@@ -98,7 +98,8 @@ export function HowItWorks() {
                   {/* Content */}
                   <div className={`${theme.cards.base} ${theme.cards.variants.gradient} ${theme.shadows.card} p-8
                     hover:bg-gradient-to-br hover:from-card-hovered/50 hover:to-transparent transition-all duration-300
-                    border border-white/10 hover:border-white/20 flex-1 relative group`}
+                    border border-white/10 hover:border-white/20 flex-1 relative group rounded-xl
+                    `}
                   >
                     {/* Step Number and Icon */}
                     <div className="flex items-start gap-6">
@@ -114,8 +115,8 @@ export function HowItWorks() {
                       </div>
 
                       {/* Text Content */}
-                      <div className="flex-1">
-                        <h3 className="text-xl font-semibold mb-2 text-text-primary group-hover:text-[#60A5FA] transition-colors duration-300">
+                      <div className="flex-1 ">
+                        <h3 className="text-xl font-semibold mb-2 text-text-primary group-hover:text-[#60A5FA] transition-colors duration-300 ">
                           {step.title}
                         </h3>
                         <p className="text-text-secondary">

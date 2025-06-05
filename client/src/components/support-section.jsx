@@ -146,7 +146,13 @@ export function SupportSection() {
   };
 
   return (
-    <section id="support" className="py-16 sm:py-20 lg:py-24 bg-gradient-to-b from-white to-gray-50/50" ref={sectionRef}>
+    <section id="support" className="relative min-h-screen bg-gradient-to-b from-[#E6F4F1] to-white pt-16 sm:pt-24 md:pt-32 pb-10 sm:pb-16 md:pb-20 overflow-hidden" ref={sectionRef}>
+     <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-20 sm:-top-40 -right-20 sm:-right-40 h-[300px] w-[300px] sm:h-[600px] sm:w-[600px] rounded-full bg-[#60A5FA]/10 blur-3xl animate-pulse" />
+        <div className="absolute -bottom-20 sm:-bottom-40 -left-20 sm:-left-40 h-[300px] w-[300px] sm:h-[600px] sm:w-[600px] rounded-full bg-[#F472B6]/10 blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/4 right-1/3 w-36 h-36 sm:w-72 sm:h-72 rounded-full bg-[#FFB86C]/10 blur-2xl" />
+        <div className="absolute bottom-1/4 left-1/3 w-36 h-36 sm:w-72 sm:h-72 rounded-full bg-[#60A5FA]/10 blur-2xl" />
+      </div>
       <motion.div 
         className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8"
         variants={containerVariants}

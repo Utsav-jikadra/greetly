@@ -3,7 +3,7 @@ import { PricingSection } from '../components/pricing-section';
 
 const PricingPage = () => {
   return (
-    <div className="min-h-screen bg-background pt-20">
+    <div className="min-h-screen bg-background ">
       <PricingSection />
     </div>
   );

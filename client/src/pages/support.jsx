@@ -3,7 +3,7 @@ import { SupportSection } from '../components/support-section';
 
 const SupportPage = () => {
   return (
-    <div className="min-h-screen bg-background pt-20">
+    <div className="min-h-screen bg-background ">
       <SupportSection />
     </div>
   );

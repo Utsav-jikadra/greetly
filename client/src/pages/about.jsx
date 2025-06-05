@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { Card } from '@/components/ui/card';
-import { Users, Heart, Globe, Zap } from 'lucide-react';
+import { Users, Heart, Globe, Zap, MessageSquare, Bell, Shield, Sparkles } from 'lucide-react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
@@ -9,23 +9,33 @@ gsap.registerPlugin(ScrollTrigger);
 const values = [
   {
     icon: Heart,
-    title: 'Authentic Connections',
-    description: 'We believe in fostering genuine relationships through meaningful communication.'
+    title: 'Empathy & Care',
+    description: 'We put ourselves in our users shoes, designing experiences that truly resonate with their emotional needs.'
   },
   {
-    icon: Users,
-    title: 'User-Centric',
-    description: "Every feature we build starts with our users' needs and experiences."
+    icon: Shield,
+    title: 'Trust & Reliability',
+    description: 'We build trust through consistent, reliable service and unwavering commitment to user privacy.'
   },
   {
     icon: Globe,
-    title: 'Global Reach',
-    description: 'Helping people stay connected across different time zones and cultures.'
+    title: 'Inclusive Connection',
+    description: 'We celebrate diversity and create tools that bring people together across all cultures and backgrounds.'
   },
   {
-    icon: Zap,
-    title: 'Innovation',
-    description: 'Constantly pushing boundaries to make staying in touch effortless.'
+    icon: Sparkles,
+    title: 'Thoughtful Innovation',
+    description: 'We innovate with purpose, ensuring every new feature enhances genuine human connection.'
+  },
+  {
+    icon: MessageSquare,
+    title: 'Clear Communication',
+    description: 'We believe in transparent, honest dialogue with our users and within our team.'
+  },
+  {
+    icon: Bell,
+    title: 'Proactive Service',
+    description: 'We anticipate needs and go above and beyond to delight our users with exceptional service.'
   }
 ];
 
@@ -47,7 +57,7 @@ const team = [
     role: 'Lead Engineer',
     image: 'https://i.pravatar.cc/300?img=6',
     bio: 'AI specialist focused on creating natural, context-aware communication.'
-    }
+  }
 ];
 
 export default function AboutPage() {
@@ -92,35 +102,41 @@ export default function AboutPage() {
   }, []);
 
   return (
-    <div className="overflow-hidden">
+    <div className="relative min-h-screen bg-gradient-to-b from-[#E6F4F1] to-white pt-16 sm:pt-24 md:pt-32 pb-10 sm:pb-16 md:pb-20 overflow-hidden">
       {/* Mission Section */}
-      <section className="bg-gradient-to-b from-white to-gray-50 py-20 mission-section">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-20 sm:-top-40 -right-20 sm:-right-40 h-[300px] w-[300px] sm:h-[600px] sm:w-[600px] rounded-full bg-[#60A5FA]/10 blur-3xl animate-pulse" />
+        <div className="absolute -bottom-20 sm:-bottom-40 -left-20 sm:-left-40 h-[300px] w-[300px] sm:h-[600px] sm:w-[600px] rounded-full bg-[#F472B6]/10 blur-3xl animate-pulse delay-1000" />
+        <div className="absolute top-1/4 right-1/3 w-36 h-36 sm:w-72 sm:h-72 rounded-full bg-[#FFB86C]/10 blur-2xl" />
+        <div className="absolute bottom-1/4 left-1/3 w-36 h-36 sm:w-72 sm:h-72 rounded-full bg-[#60A5FA]/10 blur-2xl" />
+      </div>
+        <section className="overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mission-content">
             <h1 className="text-4xl font-bold text-gray-900 mb-6">
               Our Mission
             </h1>
-            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto">
+            <p className="text-xl text-gray-600 mb-8 max-w-3xl mx-auto ">
               At Greetly, we're on a mission to make personal connections easier and more meaningful in our busy digital world. We believe that maintaining relationships shouldn't be a burden, but a joy.
             </p>
           </div>
-        </div>
+        </div>  
       </section>
 
       {/* Values Section */}
       <section className="py-20 values-section">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
-            Our Values
+          <h2 className="text-3xl font-bold text-center text-text-primary mb-10">
+            Our Core Values
           </h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {values.map((value, index) => (
-              <Card key={index} className="value-card p-6 border-2 hover:border-vibrant-indigo transition-colors">
-                <div className="h-12 w-12 bg-vibrant-indigo/10 rounded-lg flex items-center justify-center mb-4">
-                  <value.icon className="h-6 w-6 text-vibrant-indigo" />
+              <Card key={index} className="value-card p-6 border-2 hover:border-[#60A5FA] transition-colors hover:shadow-lg">
+                <div className="h-12 w-12 bg-[#60A5FA]/10 rounded-lg flex items-center justify-center mb-4">
+                  <value.icon className="h-6 w-6 text-[#60A5FA]" />
                 </div>
-                <h3 className="text-xl font-semibold text-gray-900 mb-2">{value.title}</h3>
-                <p className="text-gray-600">{value.description}</p>
+                <h3 className="text-xl font-semibold text-text-primary mb-2">{value.title}</h3>
+                <p className="text-text-secondary leading-relaxed">{value.description}</p>
               </Card>
             ))}
           </div>
@@ -128,7 +144,7 @@ export default function AboutPage() {
       </section>
 
       {/* Team Section */}
-      <section className="bg-gray-50 py-20 team-section">
+      <section className="overflow-hidden">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <h2 className="text-3xl font-bold text-center text-gray-900 mb-12">
             Meet Our Team

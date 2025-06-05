@@ -71,15 +71,15 @@ export const Navbar = () => {
           {/* Auth Buttons */}
           <div className="hidden md:flex items-center space-x-4">
             <Button
-              variant="ghost"
+              variant="outline"
               onClick={() => handleAuthClick('login')}
-              className="text-gray-600 hover:text-[#60A5FA] hover:bg-[#60A5FA]/5"
+              className="text-gray-700 hover:text-gray-900 border-gray-200 hover:border-gray-300 bg-white hover:bg-gray-50"
             >
               Log In
             </Button>
             <Button
               onClick={() => handleAuthClick('signup')}
-              className="bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] text-white hover:shadow-lg hover:shadow-[#60A5FA]/25 transition-all duration-300"
+              className="bg-[#3B82F6] text-white hover:bg-[#2563EB] transition-colors duration-200"
             >
               Sign Up
             </Button>

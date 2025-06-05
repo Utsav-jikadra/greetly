@@ -133,7 +133,7 @@ export const HeroSection = () => {
               <motion.img
                 src={img1}
                 alt="Top Left"
-                className="absolute top-[-50px] sm:top-[-100px] left-[-100px] sm:left-[-200px] w-[125px] sm:w-[250px] h-[125px] sm:h-[250px] object-cover rounded-xl shadow-xl rotate-[-12deg] z-0 border-[8px] sm:border-[15px] border-white/40 backdrop-blur-sm"
+                className="absolute top-[-50px] sm:top-[-100px] left-[-100px] sm:left-[-200px] w-[300px] sm:w-[350px] h-[300px] sm:h-[350px] object-cover rounded-xl shadow-xl rotate-[-12deg] z-0 border-[8px] sm:border-[15px] border-white/40 backdrop-blur-sm"
                 style={{ 
                   transform: img1Transform,
                   willChange: 'transform',
@@ -145,7 +145,7 @@ export const HeroSection = () => {
               <motion.img
                 src={img2}
                 alt="Top Right"
-                className="absolute top-[-60px] sm:top-[-120px] right-[-100px] sm:right-[-200px] w-[125px] sm:w-[250px] h-[125px] sm:h-[250px] object-cover rounded-xl shadow-xl rotate-[12deg] z-0 border-[8px] sm:border-[15px] border-white/40 backdrop-blur-sm"
+                className="absolute top-[-60px] sm:top-[-120px] right-[-100px] sm:right-[-200px] w-[300px] sm:w-[350px] h-[300px] sm:h-[350px] object-cover rounded-xl shadow-xl rotate-[12deg] z-0 border-[8px] sm:border-[15px] border-white/40 backdrop-blur-sm"
                 style={{ 
                   transform: img2Transform,
                   willChange: 'transform',
@@ -157,7 +157,7 @@ export const HeroSection = () => {
               <motion.img
                 src={img4}
                 alt="Bottom Left"
-                className="absolute bottom-[-50px] sm:bottom-[-100px] left-[-90px] sm:left-[-180px] w-[125px] sm:w-[250px] h-[125px] sm:h-[250px] object-cover rounded-xl shadow-xl rotate-[10deg] z-0 border-[8px] sm:border-[15px] border-white/40 backdrop-blur-sm"
+                className="absolute bottom-[-50px] sm:bottom-[-100px] left-[-90px] sm:left-[-180px] w-[300px] sm:w-[350px] h-[300px] sm:h-[350px] object-cover rounded-xl shadow-xl rotate-[10deg] z-0 border-[8px] sm:border-[15px] border-white/40 backdrop-blur-sm"
                 style={{ 
                   transform: img4Transform,
                   willChange: 'transform',
@@ -169,7 +169,7 @@ export const HeroSection = () => {
               <motion.img
                 src={img5}
                 alt="Bottom Right"
-                className="absolute bottom-[-60px] sm:bottom-[-120px] right-[-90px] sm:right-[-180px] w-[125px] sm:w-[250px] h-[125px] sm:h-[250px] object-cover rounded-xl shadow-xl rotate-[-10deg] z-0 border-[8px] sm:border-[15px] border-white/40 backdrop-blur-sm"
+                className="absolute bottom-[-60px] sm:bottom-[-120px] right-[-90px] sm:right-[-180px] w-[300px] sm:w-[350px] h-[300px] sm:h-[350px] object-cover rounded-xl shadow-xl rotate-[-10deg] z-0 border-[8px] sm:border-[15px] border-white/40 backdrop-blur-sm"
                 style={{ 
                   transform: img5Transform,
                   willChange: 'transform',

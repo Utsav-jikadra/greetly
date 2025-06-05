@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { MessageSquare, Bell, Sparkles, Globe, Heart, Shield } from 'lucide-react';
 import { theme } from '../theme/config';
@@ -37,8 +37,15 @@ const benefits = [
 export function BenefitsSection() {
   const [activeBenefit, setActiveBenefit] = useState(0);
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveBenefit((prev) => (prev + 1) % benefits.length);
+    }, 10000);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <section className={`${theme.gradients.primary} ${theme.spacing.section} relative overflow-hidden min-h-screen`}>
+    <section className={`${theme.gradients.primary} ${theme.spacing.section} relative overflow-hidden min-h-[80vh] 2xl:min-h-[70vh]`}>
       {/* Decorative background elements */}
       <div className="absolute inset-0 overflow-hidden">
         <div className="absolute top-1/4 -right-20 h-72 w-72 rounded-full bg-[#F472B6]/10 blur-3xl" />
@@ -58,7 +65,7 @@ export function BenefitsSection() {
             }
           }
         }}
-        className=" mb-10 grid grid-cols-1 md:grid-cols-3 gap-8"
+        className="mb-8 2xl:mb-12 grid grid-cols-1 md:grid-cols-3 gap-8 max-w-7xl mx-auto px-4 "
       >
         {[
           { number: "4.9/5", label: "Average Rating" },
@@ -81,7 +88,7 @@ export function BenefitsSection() {
             }}
             whileHover={theme.animations.cardHover}
             className={`${theme.cards.base} ${theme.cards.variants.gradient} ${theme.shadows.card} 
-              p-8 text-center hover:bg-gradient-to-br hover:from-[#60A5FA]/5 hover:to-transparent`}
+              p-8 text-center hover:bg-gradient-to-br hover:from-[#60A5FA]/5 hover:to-transparent rounded-2xl`}
           >
             <div className="text-4xl font-bold bg-gradient-to-r from-[#60A5FA] to-[#F472B6] bg-clip-text text-transparent mb-2">
               {stat.number}
@@ -93,121 +100,95 @@ export function BenefitsSection() {
         ))}
       </motion.div>
 
-      <div className={`${theme.spacing.container} max-w-[1920px] mx-auto`}>
+      <div className={`${theme.spacing.container} max-w-[1920px] 2xl:max-w-[1600px] mx-auto`}>
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-12 2xl:mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 gradient-text">
+          <h2 className="text-4xl md:text-5xl 2xl:text-6xl font-bold mb-4 gradient-text">
             Why Choose Greetly?
           </h2>
-          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
+          <p className="text-lg 2xl:text-xl text-text-secondary max-w-2xl mx-auto">
             Join thousands of thoughtful people who never miss life's special moments
           </p>
         </motion.div>
 
         {/* Main Content Container */}
-        <div className="flex flex-col lg:flex-row items-start justify-between gap-8 max-w-5xl mx-auto">
-          {/* Left Side Images Container */}
-          <div className="hidden lg:block lg:w-[48%] sticky top-8">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={`main-${activeBenefit}`}
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0.9 }}
-                transition={{ duration: 0.5 }}
-                className="relative"
-              >
-                {/* Main Image */}
-                <div className="w-full h-[480px] rounded-2xl overflow-hidden shadow-xl relative">
-                  <img
-                    src={benefits[activeBenefit].image}
-                    alt={`${benefits[activeBenefit].title} visualization`}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  
-                  {/* Image Title */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6">
-                    <h4 className="text-white text-xl font-semibold">
-                      {benefits[activeBenefit].title}
-                    </h4>
-                  </div>
+        <div className="flex flex-col lg:flex-row items-start justify-between gap-8 max-w-6xl mx-auto">
+          {/* Phone Mockup */}
+          <div className="w-full lg:w-1/2 relative">
+            <div className="relative mx-auto w-[600px] h-[600px]">
+              <div className={`absolute inset-0 ${theme.cards.base} ${theme.cards.variants.gradient} ${theme.shadows.card} rounded-[40px] border-8 border-gray-200 overflow-hidden`}>
+                <div className="absolute top-0 left-0 right-0 h-12 w-full bg-gray-100 rounded-t-[32px] flex items-center justify-center">
+                  <div className="w-24 h-6 bg-gray-200 rounded-full"></div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+                
+                <div className="absolute inset-0 pt-12 pb-4 px-4">
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeBenefit}
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      exit={{ opacity: 0, scale: 0.9 }}
+                      transition={{ duration: 0.5 }}
+                      className="h-full w-full rounded-2xl flex items-center justify-center"
+                    >
+                      <motion.div 
+                        initial={{ scale: 0.8 }}
+                        animate={{ scale: 1 }}
+                        transition={theme.animations.spring}
+                        className="w-full h-full"
+                      >
+                        <img 
+                          src={benefits[activeBenefit].image}
+                          alt={benefits[activeBenefit].title}
+                          className="w-full h-full rounded-2xl object-cover"
+                        />
+                      </motion.div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </div>
+              
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-24 h-2 bg-gray-200 rounded-full"></div>
+            </div>
           </div>
 
           {/* Right Side Benefits List */}
-          <div className="lg:w-[48%]">
-            <motion.div
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              variants={{
-                hidden: { opacity: 0 },
-                visible: {
-                  opacity: 1,
-                  transition: { staggerChildren: 0.15 }
-                }
-              }}
-              className="space-y-4"
-            >
-              {benefits.map((benefit, index) => (
-                <motion.div
-                  key={benefit.title}
-                  variants={{
-                    hidden: { opacity: 0, x: 50 },
-                    visible: {
-                      opacity: 1,
-                      x: 0,
-                      transition: {
-                        type: "spring",
-                        stiffness: 50,
-                        damping: 15
-                      }
-                    }
-                  }}
-                  onClick={() => setActiveBenefit(index)}
-                  className={`cursor-pointer group ${index === activeBenefit ? 'scale-102' : ''} transition-all duration-300`}
+          <div className="w-full lg:w-1/2 space-y-6 ">
+            {benefits.map((benefit, index) => (
+              <motion.div
+                key={benefit.title}
+                initial={{ opacity: 0, x: 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.5, delay: index * 0.1 }}
+                viewport={{ once: true }}
+                onMouseEnter={() => setActiveBenefit(index)}
+                className="relative hover:scale-105 transition-all duration-300 hover:shadow-2xl hover:border-2 hover:border-white/20 hover:bg-white/10 rounded-2xl"
+              >
+                <div className={`${theme.cards.base} ${theme.cards.variants.gradient} ${theme.shadows.card} p-6 rounded-2xl
+                  ${activeBenefit === index ? 'border-2 border-[#60A5FA]' : ''}`}
                 >
-                  <div className={`${theme.cards.base} ${theme.cards.variants.gradient} ${theme.shadows.card} p-4 relative
-                    hover:bg-gradient-to-br hover:from-card-hovered/50 hover:to-transparent transition-all duration-300
-                    border border-white/10 hover:border-white/20 ${index === activeBenefit ? 'border-white/30 bg-white/5' : ''}
-                    transform hover:-translate-y-2 hover:scale-[1.02] rounded-xl`}
-                  >
-                    <div className="flex items-start gap-4">
-                      {/* Icon and Number */}
-                      <div className="flex items-center gap-3">
-                        <div className={`w-10 h-10 rounded-xl bg-gradient-to-br ${benefit.gradient} p-2 text-white
-                          transform transition-all duration-300 flex items-center justify-center`}
-                        >
-                          {benefit.icon}
-                        </div>
-                        <div className="w-5 h-5 rounded-full bg-white/10 flex items-center justify-center text-sm font-bold text-white/90 group-hover:bg-white/20 transition-colors duration-300">
-                          {index + 1}
-                        </div>
-                      </div>
-                      
-                      {/* Title and Description */}
-                      <div className="flex-1">
-                        <h3 className="text-base font-semibold text-text-primary group-hover:text-[#60A5FA] transition-colors duration-300">
-                          {benefit.title}
-                        </h3>
-                        <p className="text-text-secondary text-sm mt-1.5 leading-relaxed">
-                          {benefit.description}
-                        </p>
-                      </div>
+                  <div className="flex items-start gap-4 rounded-2xl">
+                    <div className={`p-3 rounded-xl text-white bg-gradient-to-br ${benefit.gradient}`}>
+                      {benefit.icon}
+                    </div>
+                    <div>
+                      <h3 className="text-xl font-bold text-text-primary">
+                        {benefit.title}
+                      </h3>
+                      <p className="text-text-secondary mt-1">
+                        {benefit.description}
+                      </p>
                     </div>
                   </div>
-                </motion.div>
-              ))}
-            </motion.div>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </div>
