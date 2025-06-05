@@ -3,19 +3,15 @@ import { motion } from 'framer-motion';
 import { Button } from './ui/button';
 import { ArrowRight, Gift, Calendar, MessageCircle } from 'lucide-react';
 import { theme } from '../theme/config';
-import { AuthModal } from './auth-modal';
+import { useLocation } from 'wouter';
 
 const CTASection = () => {
-  const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+  const [, setLocation] = useLocation();
 
   return (
     <section className="relative py-24 overflow-hidden">
       {/* Auth Modal */}
-      <AuthModal 
-        isOpen={isAuthModalOpen} 
-        onClose={() => setIsAuthModalOpen(false)}
-        initialView="signup"
-      />
+      
 
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#60A5FA] to-[#3B82F6]">
@@ -105,11 +101,11 @@ const CTASection = () => {
           >
             <Button
               size="lg"
-              onClick={() => setIsAuthModalOpen(true)}
-              className="bg-white text-white/90 hover:bg-white/70 font-semibold text-lg px-8 py-6 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-black/20 transition-all duration-300 mb-4 group"
+              onClick={() => setLocation('/greetly/signup')}
+              className="bg-white text-white/90 hover:bg-white/70 font-semibold text-base md:text-lg px-6 md:px-8 py-4 md:py-6 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-black/20 transition-all duration-300 mb-4 group w-full md:w-auto"
             >
               Start Free – No Credit Card Needed
-              <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-4 md:h-5 w-4 md:w-5 transition-transform group-hover:translate-x-1" />
             </Button>
             <p className="text-sm text-white/80">
               Free plan includes up to 50 contacts and unlimited greetings
