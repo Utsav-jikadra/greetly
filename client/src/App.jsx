@@ -11,6 +11,7 @@ import SupportPage from './pages/support';
 import LoginPage from './pages/login';
 import SignupPage from './pages/signup';
 import { MotionConfig } from "framer-motion"; // ✅ only this is valid
+import ScrollToTop from './ScrollToTop';
 
 
 
@@ -27,6 +28,7 @@ function App() {
     <MotionConfig reducedMotion="user">
        
     <div className="min-h-screen bg-background flex flex-col">
+      <ScrollToTop />
       <Navbar onAuthClick={handleAuthClick} />
       
       <main className="flex-grow">
