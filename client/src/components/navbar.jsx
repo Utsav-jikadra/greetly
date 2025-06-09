@@ -15,7 +15,7 @@ const navItems = [
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [location] = useLocation();
+  const [location, setLocation] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -26,50 +26,58 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  useEffect(() => {
+  const handleNavigation = (path) => {
+    setLocation(path);
     setIsMenuOpen(false);
-  }, [location]);
+  };
 
   return (
-    <nav className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
-      isScrolled ? 'glass' : 'bg-transparent'
-    }`}>
+    <nav
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg border-b border-primary/10' : 'bg-transparent'
+      }`}
+    >
       <div className="container-custom">
-        <div className="flex h-16 items-center justify-between">
+        <div className="flex h-14 sm:h-16 md:h-20 items-center justify-between">
+          
           {/* Logo */}
           <Link href="/greetly">
             <a className="flex items-center">
-              <img src={logo} alt="Greetly Logo" className="h-8 w-auto sm:h-10" />
+              <img
+                src={logo}
+                alt="Greetly Logo"
+                className="h-8 sm:h-9 md:h-10 w-auto"
+              />
             </a>
           </Link>
 
           {/* Desktop Navigation */}
-          <div className="nav-menu">
+          <div className="hidden md:flex items-center gap-4 lg:gap-8">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
-                <a className={`nav-link ${
-                  location === item.href
-                    ? 'bg-primary/10 text-primary'
-                    : 'text-foreground hover:bg-primary/5 hover:text-primary'
-                }`}>
+                <a
+                  className={`text-sm lg:text-base font-semibold transition-all duration-300 hover:text-primary hover:scale-105 ${
+                    location === item.href ? 'text-primary' : 'text-gray-600'
+                  }`}
+                >
                   {item.label}
                 </a>
               </Link>
             ))}
           </div>
 
-          {/* Desktop Auth Buttons */}
-          <div className="hidden items-center space-x-4 md:flex">
+          {/* Auth Buttons */}
+          <div className="hidden md:flex items-center gap-3 lg:gap-4">
             <Button
               variant="ghost"
-              onClick={() => setLocation('/greetly/login')}
-              className="btn btn-secondary"
+              onClick={() => handleNavigation('/greetly/login')}
+              className="text-sm lg:text-base text-gray-600 hover:text-primary hover:bg-primary/5 bg-white border border-gray-200 px-3 lg:px-4 py-1.5 lg:py-2 transition-all duration-300 rounded-full"
             >
               Log In
             </Button>
             <Button
-              onClick={() => setLocation('/greetly/signup')}
-              className="btn btn-primary"
+              onClick={() => handleNavigation('/greetly/signup')}
+              className="text-sm lg:text-base gradient-primary text-white hover:shadow-lg hover:shadow-primary/25 transition-all duration-300 px-3 lg:px-4 py-1.5 lg:py-2"
             >
               Sign Up
             </Button>
@@ -77,49 +85,47 @@ export const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-primary/5 hover:text-primary md:hidden"
+            className="md:hidden p-2"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <X className="h-5 w-5" />
+              <X className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
             ) : (
-              <Menu className="h-5 w-5" />
+              <Menu className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="mobile-menu animate-fade-in">
-            <div className="container-custom py-4">
-              <div className="space-y-4">
-                {navItems.map((item) => (
-                  <Link key={item.href} href={item.href}>
-                    <a className={`block rounded-lg px-4 py-2.5 text-base font-medium transition-colors ${
-                      location === item.href
-                        ? 'bg-primary/10 text-primary'
-                        : 'text-foreground hover:bg-primary/5 hover:text-primary'
-                    }`}>
-                      {item.label}
-                    </a>
-                  </Link>
-                ))}
-                <div className="flex-responsive mt-6">
-                  <Button
-                    variant="ghost"
-                    onClick={() => setLocation('/greetly/login')}
-                    className="btn btn-secondary w-full"
-                  >
-                    Log In
-                  </Button>
-                  <Button
-                    onClick={() => setLocation('/greetly/signup')}
-                    className="btn btn-primary w-full"
-                  >
-                    Sign Up
-                  </Button>
-                </div>
+          <div className="md:hidden py-3 sm:py-4 bg-white/95 backdrop-blur-md rounded-b-2xl shadow-xl border-t border-primary/10">
+            <div className="flex flex-col gap-2 sm:gap-4">
+              {navItems.map((item) => (
+                <button
+                  key={item.href}
+                  onClick={() => handleNavigation(item.href)}
+                  className={`text-sm sm:text-base font-medium transition-colors hover:text-primary px-4 py-2 rounded-lg hover:bg-primary/5 text-left ${
+                    location === item.href ? 'text-primary bg-primary/5' : 'text-gray-600'
+                  }`}
+                >
+                  {item.label}
+                </button>
+              ))}
+              <div className="pt-3 sm:pt-4 flex flex-col gap-2 sm:gap-3 px-4">
+                <Button
+                  variant="ghost"
+                  onClick={() => handleNavigation('/greetly/login')}
+                  className="w-full text-sm sm:text-base text-gray-600 hover:text-primary hover:bg-primary/5 border border-gray-200"
+                >
+                  Log In
+                </Button>
+                <Button
+                  onClick={() => handleNavigation('/greetly/signup')}
+                  className="w-full text-sm sm:text-base gradient-primary text-white hover:shadow-lg hover:shadow-primary/25"
+                >
+                  Sign Up
+                </Button>
               </div>
             </div>
           </div>
@@ -127,4 +133,4 @@ export const Navbar = () => {
       </div>
     </nav>
   );
-}; 
+};
