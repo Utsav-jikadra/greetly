@@ -13,7 +13,7 @@ export const theme = {
     }
   },
   fonts: {
-    sans: 'Inter, Poppins, system-ui, -apple-system, sans-serif'
+    sans: 'Onest, sans-serif'
   },
   animations: {
     // Common animation variants

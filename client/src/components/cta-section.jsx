@@ -1,22 +1,20 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { Button } from './ui/button';
-import { ArrowRight, Gift, Calendar, MessageCircle } from 'lucide-react';
-import { theme } from '../theme/config';
-import { useLocation } from 'wouter';
+import React from "react";
+import { motion } from "framer-motion";
+import { Button } from "./ui/button";
+import { ArrowRight, Gift, Calendar, MessageCircle } from "lucide-react";
+import { useLocation } from "wouter";
 
 const CTASection = () => {
   const [, setLocation] = useLocation();
 
   return (
-    <section className="relative py-24 overflow-hidden">
+    <section className="relative py-16 sm:py-24 md:py-32 overflow-hidden">
       {/* Auth Modal */}
-      
 
       {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-[#60A5FA] to-[#3B82F6]">
+      <div className="absolute inset-0 bg-gradient-to-r from-[#1B1F3B] via-[#323A78] to-[#7749B9]">
         {/* Decorative Elements */}
-        <div className="absolute inset-0">
+        <div className="absolute inset-0 pointer-events-none">
           <div className="absolute -top-40 -right-40 h-[500px] w-[500px] rounded-full bg-white/10 blur-3xl" />
           <div className="absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-white/10 blur-3xl" />
           <div className="absolute top-1/4 right-1/3 w-64 h-64 rounded-full bg-[#F472B6]/20 blur-2xl" />
@@ -24,7 +22,7 @@ const CTASection = () => {
         </div>
       </div>
 
-      <div className="container relative mx-auto px-4">
+      <div className="container relative mx-auto px-4 sm:px-6 lg:px-8">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -38,10 +36,10 @@ const CTASection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-4xl md:text-5xl font-bold mb-6 text-white"
+            className="text-3xl sm:text-4xl md:text-5xl font-bold mb-6 text-white leading-tight"
           >
             Let Greetly Remember,
-            <span className="block mt-2">So You Don't Have To</span>
+            <span className="block mt-4">So You Don't Have To</span>
           </motion.h2>
 
           <motion.p
@@ -49,10 +47,10 @@ const CTASection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.3 }}
-            className="text-lg md:text-xl text-white/90 mb-12"
+            className="text-lg sm:text-xl text-white/90 mb-12 sm:mb-16"
           >
-            Join thousands of thoughtful people who never miss life's special moments.
-            Start sending meaningful greetings today.
+            Join thousands of thoughtful people who never miss life's special
+            moments. Start sending meaningful greetings today.
           </motion.p>
 
           {/* Features Grid */}
@@ -61,21 +59,21 @@ const CTASection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.4 }}
-            className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12"
+            className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6 mb-12 sm:mb-16"
           >
             {[
               {
                 icon: Calendar,
-                text: "Smart Event Reminders"
+                text: "Smart Event Reminders",
               },
               {
                 icon: MessageCircle,
-                text: "AI-Powered Messages"
+                text: "AI-Powered Messages",
               },
               {
                 icon: Gift,
-                text: "Thoughtful Gift Options"
-              }
+                text: "Thoughtful Gift Options",
+              },
             ].map((feature, index) => (
               <motion.div
                 key={feature.text}
@@ -83,9 +81,9 @@ const CTASection = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: 0.5 + index * 0.1 }}
-                className="flex items-center justify-center gap-3 text-white/90 bg-white/10 rounded-xl px-4 py-3 backdrop-blur-sm hover:bg-white/20 transition-all duration-300"
+                className="flex items-center justify-center gap-3 text-white/90 bg-white/10 rounded-xl px-4 py-4 backdrop-blur-sm hover:bg-white/20 transition-all duration-300 group"
               >
-                <feature.icon className="w-5 h-5" />
+                <feature.icon className="w-5 h-5 group-hover:scale-110 transition-transform duration-300" />
                 <span className="font-medium">{feature.text}</span>
               </motion.div>
             ))}
@@ -101,13 +99,13 @@ const CTASection = () => {
           >
             <Button
               size="lg"
-              onClick={() => setLocation('/greetly/signup')}
-              className="bg-white text-white/90 hover:bg-white/70 font-semibold text-base md:text-lg px-6 md:px-8 py-4 md:py-6 shadow-xl shadow-black/10 hover:shadow-2xl hover:shadow-black/20 transition-all duration-300 mb-4 group w-full md:w-auto"
+              onClick={() => setLocation("/greetly/signup")}
+              className="text-white bg-gradient-to-r from-[#09A3DA] via-[#7749B9] to-[#C03D84] text-base sm:text-lg px-6 sm:px-8 py-4 sm:py-6 shadow-xl shadow-[#09A3DA]/25 hover:shadow-2xl hover:shadow-[#09A3DA]/30 transition-all duration-300 mb-6 group w-full sm:w-auto max-w-md"
             >
               Start Free – No Credit Card Needed
-              <ArrowRight className="ml-2 h-4 md:h-5 w-4 md:w-5 transition-transform group-hover:translate-x-1" />
+              <ArrowRight className="ml-2 h-4 sm:h-5 w-4 sm:w-5 transition-transform group-hover:translate-x-1" />
             </Button>
-            <p className="text-sm text-white/80">
+            <p className="text-sm sm:text-base text-white/80">
               Free plan includes up to 50 contacts and unlimited greetings
             </p>
           </motion.div>
@@ -117,4 +115,4 @@ const CTASection = () => {
   );
 };
 
-export default CTASection; 
+export default CTASection;

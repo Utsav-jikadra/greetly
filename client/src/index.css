@@ -46,24 +46,139 @@
     --radius-md: 1rem;
     --radius-lg: 1.5rem;
   }
-}
 
-@layer base {
   * {
     @apply border-border;
   }
   
+  html {
+    @apply scroll-smooth;
+  }
+  
   body {
-    @apply bg-background text-foreground antialiased;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    @apply bg-background text-foreground antialiased min-h-screen;
+    font-family: 'Onest', sans-serif;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    @apply font-semibold tracking-tight;
+  /* Responsive Typography */
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight;
+  }
+
+  h2 {
+    @apply text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight;
+  }
+
+  h3 {
+    @apply text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight;
+  }
+
+  h4 {
+    @apply text-xl sm:text-2xl lg:text-3xl font-semibold tracking-tight;
+  }
+
+  p {
+    @apply text-base sm:text-lg leading-relaxed;
+  }
+}
+
+@layer components {
+  /* Container */
+  .container-custom {
+    @apply container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl;
+  }
+
+  /* Section */
+  .section {
+    @apply py-12 sm:py-16 lg:py-24;
+  }
+
+  /* Card */
+  .card {
+    @apply rounded-xl border border-border bg-white p-4 sm:p-6 shadow-sm hover:shadow-md transition-all duration-300;
+  }
+
+  /* Button */
+  .btn {
+    @apply px-4 sm:px-6 py-2 sm:py-3 rounded-lg font-medium transition-all duration-300 inline-flex items-center justify-center;
+  }
+
+  .btn-primary {
+    @apply bg-primary text-white hover:bg-primary-hover;
+  }
+
+  .btn-secondary {
+    @apply bg-white border border-border hover:bg-gray-50;
+  }
+
+  /* Form Elements */
+  .input {
+    @apply w-full rounded-lg border border-border bg-background px-4 py-2 sm:py-3 text-base focus:outline-none focus:ring-2 focus:ring-primary/20;
+  }
+
+  .form-group {
+    @apply space-y-2;
+  }
+
+  .label {
+    @apply block text-sm font-medium text-foreground mb-1;
   }
 }
 
 @layer utilities {
+  /* Responsive Grid */
+  .grid-cols-responsive {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8;
+  }
+
+  .grid-cols-responsive-4 {
+    @apply grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-8;
+  }
+
+  /* Responsive Flex */
+  .flex-responsive {
+    @apply flex flex-col sm:flex-row items-center gap-4 sm:gap-6;
+  }
+
+  /* Responsive Spacing */
+  .space-responsive {
+    @apply space-y-6 sm:space-y-8 lg:space-y-12;
+  }
+
+  /* Responsive Text */
+  .text-responsive {
+    @apply text-base sm:text-lg lg:text-xl;
+  }
+
+  /* Responsive Container */
+  .content-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
+  /* Responsive Navigation */
+  .nav-menu {
+    @apply hidden md:flex items-center space-x-1 lg:space-x-2;
+  }
+
+  .nav-link {
+    @apply px-3 py-2 text-sm lg:text-base rounded-lg transition-colors;
+  }
+
+  /* Responsive Images */
+  .img-responsive {
+    @apply w-full h-auto object-cover;
+  }
+
+  /* Responsive Table */
+  .table-responsive {
+    @apply w-full overflow-x-auto;
+  }
+
+  /* Mobile Menu */
+  .mobile-menu {
+    @apply fixed inset-0 bg-white z-50 md:hidden overflow-y-auto;
+  }
+
   /* Text Colors */
   .text-foreground {
     color: var(--foreground);
@@ -170,6 +285,11 @@
   }
 }
 
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
 /* Animation Classes */
 .animate-float {
   animation: float 3s ease-in-out infinite;
@@ -181,6 +301,10 @@
 
 .animate-slide-up {
   animation: slideUp 0.5s ease-out forwards;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-in-out;
 }
 
 /* Component Base Styles */
@@ -233,15 +357,11 @@
 }
 
 /* Layout Utilities */
-.container-custom {
-  @apply mx-auto max-w-7xl px-4 sm:px-6 lg:px-8;
-}
-
 .section-spacing {
   @apply py-16 sm:py-24 lg:py-32;
 }
 
-/* Responsive Text */
-.text-responsive {
-  @apply text-base sm:text-lg lg:text-xl;
+/* Glass Effect */
+.glass {
+  @apply bg-white/80 backdrop-blur-sm border border-white/20;
 }

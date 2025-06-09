@@ -107,7 +107,7 @@ export function PricingSection() {
         >
           <div className="text-center mb-8 sm:mb-12 lg:mb-16 mt-5">
             <motion.h2 
-              className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] bg-clip-text text-transparent mb-2 sm:mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-bold bg-gradient-to-r from-[#09A3DA] via-[#7749B9] to-[#C03D84] bg-clip-text text-transparent mb-2 sm:mb-4"
               variants={itemAnimation}
             >
               Simple, Transparent Pricing

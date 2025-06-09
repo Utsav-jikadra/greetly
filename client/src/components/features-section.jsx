@@ -9,6 +9,7 @@ import {
   Sparkles,
   ChevronRight
 } from 'lucide-react';
+import { theme } from '../theme/config';
 
 const features = [
   {
@@ -16,48 +17,42 @@ const features = [
     title: "Smart Scheduling",
     description: "Automatically schedule greetings for all important dates",
     image: "https://images.unsplash.com/photo-1517842645767-c639042777db?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    color: "bg-sky-100",
-    accent: "text-sky-600"
+    gradient: "from-[#60A5FA] to-[#3B82F6]"
   },
   {
     icon: Heart,
-    title: "Personal Touch",
+    title: "Personal Touch", 
     description: "Create messages that feel authentic and heartfelt",
     image: "https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1374&q=80",
-    color: "bg-pink-100",
-    accent: "text-pink-600"
+    gradient: "from-[#F472B6] to-[#EC4899]"
   },
   {
     icon: Bell,
     title: "Smart Reminders",
     description: "Never forget an important occasion again",
     image: "https://images.unsplash.com/photo-1521791136064-7986c2920216?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1469&q=80",
-    color: "bg-amber-100",
-    accent: "text-amber-600"
+    gradient: "from-[#FFB86C] to-[#F59E0B]"
   },
   {
     icon: MessageCircle,
     title: "Multi-Channel",
     description: "Send via WhatsApp, SMS, Email or social media",
     image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    color: "bg-sky-100",
-    accent: "text-sky-600"
+    gradient: "from-[#60A5FA] to-[#3B82F6]"
   },
   {
     icon: Gift,
     title: "Gift Integration",
     description: "Add the perfect gift to your greeting",
     image: "https://images.unsplash.com/photo-1519671482749-fd09be7ccebf?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1470&q=80",
-    color: "bg-pink-100",
-    accent: "text-pink-600"
+    gradient: "from-[#F472B6] to-[#EC4899]"
   },
   {
     icon: Sparkles,
     title: "AI Magic",
     description: "Let our AI craft the perfect message for you",
     image: "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1465&q=80",
-    color: "bg-amber-100",
-    accent: "text-amber-600"
+    gradient: "from-[#FFB86C] to-[#F59E0B]"
   }
 ];
 
@@ -68,18 +63,18 @@ export function FeaturesSection() {
     <section className="bg-white py-20 px-4 sm:px-6 lg:px-8 relative overflow-hidden">
       {/* Decorative elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute top-20 right-20 h-64 w-64 rounded-full bg-sky-50 blur-3xl" />
-        <div className="absolute bottom-20 left-20 h-64 w-64 rounded-full bg-pink-50 blur-3xl" />
-        <Sparkles className="absolute top-1/3 left-1/4 w-8 h-8 text-amber-300 animate-pulse" />
+        <div className="absolute top-20 right-20 h-64 w-64 rounded-full bg-[#60A5FA]/10 blur-3xl" />
+        <div className="absolute bottom-20 left-20 h-64 w-64 rounded-full bg-[#F472B6]/10 blur-3xl" />
+        <Sparkles className="absolute top-1/3 left-1/4 w-8 h-8 text-[#FFB86C] animate-pulse" />
       </div>
 
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-sky-500 to-pink-500 bg-clip-text text-transparent">
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r  from-[#09A3DA] via-[#7749B9] to-[#C03D84] bg-clip-text text-transparent">
             Celebrate Every Moment
           </h2>
-          <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+          <p className="text-lg text-text-secondary max-w-2xl mx-auto">
             Thoughtful greetings made effortless with Greetly's powerful features
           </p>
         </div>
@@ -88,15 +83,15 @@ export function FeaturesSection() {
         <div className="flex flex-col lg:flex-row gap-12 items-center">
           {/* Image carousel - Left */}
           <div className="w-full lg:w-1/2">
-            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-xl">
+            <div className="relative aspect-[4/5] rounded-3xl overflow-hidden shadow-xl border-8 border-white/40 backdrop-blur-sm">
               <AnimatePresence mode="wait">
                 <motion.div
                   key={activeFeature}
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 0.3 }}
-                  className={`absolute inset-0 ${features[activeFeature].color} flex items-center justify-center`}
+                  initial={{ opacity: 0, scale: 0.95 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0.95 }}
+                  transition={{ duration: 0.4 }}
+                  className="absolute inset-0 flex items-center justify-center"
                 >
                   <img 
                     src={features[activeFeature].image} 
@@ -108,50 +103,39 @@ export function FeaturesSection() {
             </div>
           </div>
 
-          {/* Vertical stepper - Right */}
+          {/* Feature cards - Right */}
           <div className="w-full lg:w-1/2">
             <div className="space-y-4">
               {features.map((feature, index) => (
                 <motion.div
                   key={feature.title}
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
                   onMouseEnter={() => setActiveFeature(index)}
-                  className={`relative p-6 rounded-xl border cursor-pointer transition-all ${
-                    activeFeature === index 
-                      ? 'border-sky-200 bg-white shadow-lg' 
-                      : 'border-gray-100 bg-gray-50'
-                  }`}
+                  className="group"
                 >
-                  <div className="flex items-start gap-4">
-                    <div className={`p-3 rounded-lg ${feature.color} ${feature.accent}`}>
-                      <feature.icon className="w-5 h-5" />
+                  <div className={`bg-white/80 backdrop-blur-sm p-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 border border-white/20 ${
+                    activeFeature === index ? 'border-[#60A5FA] shadow-[#60A5FA]/10' : ''
+                  }`}>
+                    <div className="flex items-start gap-4">
+                      <div className={`p-3 rounded-xl bg-gradient-to-br ${feature.gradient} shadow-lg text-white`}>
+                        <feature.icon className="w-5 h-5" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-xl font-bold text-text-primary mb-2 group-hover:text-[#60A5FA] transition-colors">
+                          {feature.title}
+                        </h3>
+                        <p className="text-text-secondary">
+                          {feature.description}
+                        </p>
+                      </div>
+                      <ChevronRight className={`w-5 h-5 mt-1 transition-transform group-hover:translate-x-1 ${
+                        activeFeature === index ? 'text-[#60A5FA]' : 'text-gray-400'
+                      }`} />
                     </div>
-                    <div className="flex-1">
-                      <h3 className={`text-xl font-semibold ${
-                        activeFeature === index ? 'text-gray-900' : 'text-gray-700'
-                      }`}>
-                        {feature.title}
-                      </h3>
-                      <p className="text-gray-600 mt-1">
-                        {feature.description}
-                      </p>
-                    </div>
-                    <ChevronRight className={`w-5 h-5 mt-1 ${
-                      activeFeature === index ? 'text-sky-500' : 'text-gray-400'
-                    }`} />
                   </div>
-
-                  {/* Active indicator */}
-                  {activeFeature === index && (
-                    <motion.div 
-                      layoutId="activeFeature"
-                      className="absolute inset-0 -z-10 rounded-xl bg-white shadow-md"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      transition={{ duration: 0.3 }}
-                    />
-                  )}
                 </motion.div>
               ))}
             </div>

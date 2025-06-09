@@ -55,7 +55,7 @@ export function Testimonials() {
             }}
             className="text-center mb-16"
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 gradient-text">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6 bg-gradient-to-r from-[#09A3DA] via-[#7749B9] to-[#C03D84] bg-clip-text text-transparent">
               What Our Users Say
             </h2>
             <p className="text-lg text-text-secondary max-w-2xl mx-auto">

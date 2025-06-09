@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'wouter';
 import { Button } from './ui/button';
 import { Menu, X } from 'lucide-react';
+import logo from '../assets/Greetly-logo.svg';
 
 const navItems = [
   { label: 'Home', href: '/greetly' },
@@ -14,7 +15,7 @@ const navItems = [
 export const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const [location, setLocation] = useLocation();
+  const [location] = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -25,45 +26,50 @@ export const Navbar = () => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
+
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        isScrolled ? 'bg-white/80 backdrop-blur-md shadow-lg border-b border-[#60A5FA]/10' : 'bg-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-4">
+    <nav className={`fixed left-0 right-0 top-0 z-50 transition-all duration-300 ${
+      isScrolled ? 'glass' : 'bg-transparent'
+    }`}>
+      <div className="container-custom">
         <div className="flex h-16 items-center justify-between">
-          
-            <a className="text-2xl font-bold bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] bg-clip-text text-transparent">Greetly</a>
-          
+          {/* Logo */}
+          <Link href="/greetly">
+            <a className="flex items-center">
+              <img src={logo} alt="Greetly Logo" className="h-8 w-auto sm:h-10" />
+            </a>
+          </Link>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="nav-menu">
             {navItems.map((item) => (
               <Link key={item.href} href={item.href}>
-                <a
-                  className={`text-base font-medium transition-all duration-300 hover:text-[#60A5FA] hover:scale-105 ${
-                    location === item.href ? 'text-[#60A5FA]' : 'text-gray-600'
-                  }`}
-                >
+                <a className={`nav-link ${
+                  location === item.href
+                    ? 'bg-primary/10 text-primary'
+                    : 'text-foreground hover:bg-primary/5 hover:text-primary'
+                }`}>
                   {item.label}
                 </a>
               </Link>
             ))}
           </div>
 
-          {/* Auth Buttons */}
-          <div className="hidden md:flex items-center space-x-4">
+          {/* Desktop Auth Buttons */}
+          <div className="hidden items-center space-x-4 md:flex">
             <Button
               variant="ghost"
               onClick={() => setLocation('/greetly/login')}
-              className="text-gray-600 hover:text-[#60A5FA] hover:bg-[#60A5FA]/5 bg-white border border-gray-200 px-4 py-2 transition-all duration-300 rounded-full"
+              className="btn btn-secondary"
             >
               Log In
             </Button>
             <Button
               onClick={() => setLocation('/greetly/signup')}
-              className="bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] text-white hover:shadow-lg hover:shadow-[#60A5FA]/25 transition-all duration-300"
+              className="btn btn-primary"
             >
               Sign Up
             </Button>
@@ -71,47 +77,49 @@ export const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden"
+            className="inline-flex h-10 w-10 items-center justify-center rounded-lg text-foreground hover:bg-primary/5 hover:text-primary md:hidden"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
             {isMenuOpen ? (
-              <X className="h-6 w-6 text-gray-600" />
+              <X className="h-5 w-5" />
             ) : (
-              <Menu className="h-6 w-6 text-gray-600" />
+              <Menu className="h-5 w-5" />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {isMenuOpen && (
-          <div className="md:hidden py-4 bg-white/95 backdrop-blur-md rounded-b-2xl shadow-xl border-t border-[#60A5FA]/10">
-            <div className="flex flex-col space-y-4">
-              {navItems.map((item) => (
-                <Link key={item.href} href={item.href}>
-                  <a
-                    className={`text-sm font-medium transition-colors hover:text-[#60A5FA] px-4 py-2 rounded-lg hover:bg-[#60A5FA]/5 ${
-                      location === item.href ? 'text-[#60A5FA] bg-[#60A5FA]/5' : 'text-gray-600'
-                    }`}
-                    onClick={() => setIsMenuOpen(false)}
+          <div className="mobile-menu animate-fade-in">
+            <div className="container-custom py-4">
+              <div className="space-y-4">
+                {navItems.map((item) => (
+                  <Link key={item.href} href={item.href}>
+                    <a className={`block rounded-lg px-4 py-2.5 text-base font-medium transition-colors ${
+                      location === item.href
+                        ? 'bg-primary/10 text-primary'
+                        : 'text-foreground hover:bg-primary/5 hover:text-primary'
+                    }`}>
+                      {item.label}
+                    </a>
+                  </Link>
+                ))}
+                <div className="flex-responsive mt-6">
+                  <Button
+                    variant="ghost"
+                    onClick={() => setLocation('/greetly/login')}
+                    className="btn btn-secondary w-full"
                   >
-                    {item.label}
-                  </a>
-                </Link>
-              ))}
-              <div className="pt-4 flex flex-col space-y-3 px-4">
-                <Button
-                  variant="ghost"
-                  onClick={() => setLocation('/greetly/login')}
-                  className="w-full text-gray-600 hover:text-[#60A5FA] hover:bg-[#60A5FA]/5 border border-gray-200"
-                >
-                  Log In
-                </Button>
-                <Button
-                  onClick={() => setLocation('/greetly/signup')}
-                  className="w-full bg-gradient-to-r from-[#60A5FA] to-[#3B82F6] text-white hover:shadow-lg hover:shadow-[#60A5FA]/25"
-                >
-                  Sign Up
-                </Button>
+                    Log In
+                  </Button>
+                  <Button
+                    onClick={() => setLocation('/greetly/signup')}
+                    className="btn btn-primary w-full"
+                  >
+                    Sign Up
+                  </Button>
+                </div>
               </div>
             </div>
           </div>
